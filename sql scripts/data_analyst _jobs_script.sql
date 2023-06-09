@@ -92,12 +92,12 @@ WHERE title LIKE '%Analyst%';
 
 -- Q12 - How many different job titles do not contain either the word ‘Analyst’ or the word ‘Analytics’? What word do these positions have in common?
 
-SELECT *
+SELECT title, UPPER(title)
 FROM data_analyst_jobs
-WHERE title NOT LIKE '%Analyst%'
-AND title NOT LIKE '%Analytics%';
+WHERE UPPER(title) NOT LIKE '%ANALYST%'
+AND UPPER(title) NOT LIKE '%ANALYTICS%';
 
--- Answer - All the remaining entries either have the word analyst or analytics capitalized or dont contain the words at all.
+-- Answer - All 4 remaining entries involve Tableau.
 
 -- Bonus Question Part 1 - You want to understand which jobs requiring SQL are hard to fill. Find the number of jobs by industry (domain) that require SQL and have been posted longer than 3 weeks.
 
