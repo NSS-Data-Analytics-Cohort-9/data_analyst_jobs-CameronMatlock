@@ -84,6 +84,66 @@ ORDER BY average_star_rating DESC;
 
 -- Q11 - Find all the job titles that contain the word ‘Analyst’. How many different job titles are there? 
 
+SELECT title
+FROM data_analyst_jobs
+WHERE title LIKE '%Analyst%';
+
+-- Answer - There are a total of 1636 job titles that contain the word 'Analyst'.
+
+-- Q12 - How many different job titles do not contain either the word ‘Analyst’ or the word ‘Analytics’? What word do these positions have in common?
+
+SELECT *
+FROM data_analyst_jobs
+WHERE title NOT LIKE '%Analyst%'
+AND title NOT LIKE '%Analytics%';
+
+-- Answer - All the remaining entries either have the word analyst or analytics capitalized or dont contain the words at all.
+
+-- Bonus Question Part 1 - You want to understand which jobs requiring SQL are hard to fill. Find the number of jobs by industry (domain) that require SQL and have been posted longer than 3 weeks.
+
+SELECT DISTINCT(domain), COUNT(title) AS number_of_jobs
+FROM data_analyst_jobs
+WHERE skill = 'SQL'
+AND days_since_posting > 21
+GROUP BY domain;
+
+-- Bonus Question Part 2 - Disregard any postings where the domain is NULL.
+
+SELECT DISTINCT(domain), COUNT(title) AS number_of_jobs
+FROM data_analyst_jobs
+WHERE skill = 'SQL'
+AND days_since_posting > 21
+AND domain IS NOT NULL
+GROUP BY domain;
+
+-- Bonus Question Part 3 - Order your results so that the domain with the greatest number of `hard to fill` jobs is at the top. 
+
+SELECT DISTINCT(domain), COUNT(title) AS number_of_jobs
+FROM data_analyst_jobs
+WHERE skill = 'SQL'
+AND days_since_posting > 21
+AND domain IS NOT NULL
+GROUP BY domain
+ORDER BY COUNT(title) DESC;
+
+-- Bonus Question Part 4 - Which three industries are in the top 4 on this list? How many jobs have been listed for more than 3 weeks for each of the top 4?
+
+-- Answer - The four industries with the most hard to fill jobs are Consulting and Buisness Services, Consumer Goods and Services, Computers and Electronics and Internet and Software.
+-- Consulting and Buisness Services - 5 Jobs
+-- Consumer Goods and Services - 2 Jobs
+-- Computers and Electronics - 1 Jobs
+-- Internet and Software - 1 Job
+
+
+
+
+
+
+
+
+
+
+
 
 
 
